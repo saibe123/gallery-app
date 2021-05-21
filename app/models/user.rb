@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   attr_accessor :login
+  has_many :galleries
+
+  before_create :slugify
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -12,5 +16,9 @@ class User < ApplicationRecord
     where(conditions).where(
       ["lower(username) = :value OR lower(email) = :value",
       { value: login.strip.downcase}]).first
+  end
+
+  def slugify
+    self.slug = username.parameterize
   end
 end

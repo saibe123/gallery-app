@@ -1,2 +1,2 @@
-<% home_title = current_user.present? ? `Welcome back ${current_user.email}` : "Welcome to Picture Shack" %>
-<h1> <%= home_title %> </h1>
+
+<h1> <%= current_user.present? ? 'Welcome back ' + current_user.username : 'Welcome to Picture Shack' %> </h1>
