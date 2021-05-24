@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :login
-  has_many :galleries
+  has_many :galleries, dependent: :destroy
 
   before_create :slugify
 

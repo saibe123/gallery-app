@@ -56,3 +56,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mini_magick'
 gem 'rails-assets-jcrop', source: 'https://rails-assets.org'
+gem 'pry'

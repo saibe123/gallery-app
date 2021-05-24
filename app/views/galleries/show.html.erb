@@ -3,12 +3,14 @@
 <p>
   <strong>Title:</strong>
   <%= @gallery.title %>
+  <%= @gallery %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @gallery.user_id %>
+  <% Post.where(gallery_id: @gallery.id).each do |post| %>
+    <%= post.title %>
+  <% end %>
 </p>
 
-<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
-<%= link_to 'Back', galleries_path %>
+<%= link_to 'Add Post', gallery_posts_path(@gallery) %> |
+<%= link_to 'Back', user_galleries_path(@user) %>

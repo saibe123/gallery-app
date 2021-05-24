@@ -1,10 +1,12 @@
 class GalleriesController < ApplicationController
+  before_action :get_user
   before_action :set_gallery, only: %i[ show edit update destroy ]
 
   # GET /galleries or /galleries.json
   def index
     if user_signed_in?
-      @galleries = Gallery.where(user: current_user.id)
+      # @galleries = Gallery.where(user: current_user.id)
+      @galleries = @user.galleries
     end
   end
 
@@ -14,7 +16,8 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/new
   def new
-    @gallery = Gallery.new
+    # @gallery = Gallery.new
+    @gallery = @user.galleries.build
   end
 
   # GET /galleries/1/edit
@@ -23,8 +26,8 @@ class GalleriesController < ApplicationController
 
   # POST /galleries or /galleries.json
   def create
-    @gallery = Gallery.new(gallery_params)
-    @gallery.update(:user => current_user)
+    # @gallery = Gallery.new(gallery_params)
+    @gallery = @user.galleries.build(gallery_params)
     respond_to do |format|
       if @gallery.save
         format.html { redirect_to @gallery, notice: "Gallery was successfully created." }
@@ -38,14 +41,14 @@ class GalleriesController < ApplicationController
 
   # PATCH/PUT /galleries/1 or /galleries/1.json
   def update
-    respond_to do |format|
-      if @gallery.update(gallery_params)
-        format.html { redirect_to @gallery, notice: "Gallery was successfully updated." }
-        format.json { render :show, status: :ok, location: @gallery }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @gallery.errors, status: :unprocessable_entity }
-      end
+      respond_to do |format|
+        if @gallery.update(gallery_params)
+          format.html { redirect_to user_gallery_path(@user), notice: "Gallery was successfully updated." }
+          format.json { render :show, status: :ok, location: @gallery }
+        else
+         format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @gallery.errors, status: :unprocessable_entity }
+        end
     end
   end
 
@@ -53,19 +56,28 @@ class GalleriesController < ApplicationController
   def destroy
     @gallery.destroy
     respond_to do |format|
-      format.html { redirect_to galleries_url, notice: "Gallery was successfully destroyed." }
+      format.html { redirect_to user_gallery_path(@user), notice: "Gallery was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_gallery
-      @gallery = Gallery.find(params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
     def gallery_params
       params.require(:gallery).permit(:title)
     end
+
+    def get_user
+      @user = current_user
+    end
+
+    def set_gallery
+      if user_signed_in?
+        @gallery = @user.galleries.find(params[:id])
+      else
+         @gallery = Gallery.find(params[:id])
+      end
+    end
+
 end
