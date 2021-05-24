@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @gallery.posts.build
+    @post = @gallery.posts.build
   end
 
   # GET /posts/1/edit
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     # @post.update(:gallery => @gallery_id)
     respond_to do |format|
       if @post.save
-        format.html { redirect_to gallery_post_path(@gallery), notice: "Post was successfully created." }
+        format.html { redirect_to gallery_post_path(@gallery, @post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -7,8 +7,8 @@
 
 <p>
   <strong>Gallery:</strong>
-  <%= @post.Gallery_id %>
+  <%= @gallery.id %>
 </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Edit', edit_gallery_post_path(@gallery) %> |
+<%= link_to 'Back', gallery_posts_path(@gallery) %>
