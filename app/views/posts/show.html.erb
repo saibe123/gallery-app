@@ -7,8 +7,17 @@
 
 <p>
   <strong>Gallery:</strong>
-  <%= @gallery.id %>
+  <%= @gallery.title %>
 </p>
 
-<%= link_to 'Edit', edit_gallery_post_path(@gallery) %> |
-<%= link_to 'Back', gallery_posts_path(@gallery) %>
+<p>
+  <strong>Uploaded by:</strong>
+  <%= @gallery.user.username %>
+</p>
+
+<p>
+<%= image_tag(@post.image) %>
+</p>
+
+<%= link_to 'Delete', [@gallery, @post], method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Back', [@gallery.user ,@gallery] %>

@@ -23,7 +23,6 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = @gallery.posts.build(post_params)
-    # @post.update(:gallery => @gallery_id)
     respond_to do |format|
       if @post.save
         format.html { redirect_to gallery_post_path(@gallery, @post), notice: "Post was successfully created." }
@@ -52,7 +51,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to gallery_post_path(@gallery), notice: "Post was successfully destroyed." }
+      format.html { redirect_to gallery_posts_path(@gallery), notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -69,6 +68,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :gallery_id)
+      params.require(:post).permit(:title, :gallery_id, :image)
     end
 end
