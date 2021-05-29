@@ -1,8 +1,3 @@
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-</head>
-
-
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
@@ -12,6 +7,7 @@
     </div>
   </section>
 
+  <% if Post.count != 0 %>
   <div class="gallery-block cards-gallery">
   <div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -21,7 +17,9 @@
           <div class="card shadow-sm">
             <%= link_to image_tag(post.thumb, :class =>"card-img-top"), [post.gallery, post] %>
           <div class="card-body">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><%= post.title %></p>
+            <p class="card-text">By User: <%= post.gallery.user.username %></p>
+
           </div>
         </div>
         </div>
@@ -30,4 +28,5 @@
     </div>
   </div>
   </div>
+  <% end %>
 
