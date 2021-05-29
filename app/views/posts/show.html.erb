@@ -21,4 +21,4 @@
 <% if @user_owns_gallery %>
   <%= link_to 'Delete', [@gallery, @post], method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-  <%= link_to 'Back', [@gallery.user ,@gallery] %>
+<%= link_to 'Back', [@gallery.user ,@gallery] %>
