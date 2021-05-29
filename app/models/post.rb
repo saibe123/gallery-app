@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_one_attached :image
 
   def thumb
-    self.image.variant(resize_to_limit: [348,300]).processed
+    self.image.variant(resize_to_limit: [200,200]).processed
   end
 
 
