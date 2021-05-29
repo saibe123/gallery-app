@@ -17,8 +17,10 @@
         <td><%= post.title %></td>
         <td><%= post.gallery_id %></td>
         <td><%= link_to 'Show', [@gallery, post] %></td>
-        <td><%= link_to 'Edit', edit_gallery_post_path(@gallery, post) %></td>
-        <td><%= link_to 'Destroy', [@gallery, post], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @user_owns_gallery %>
+          <td><%= link_to 'Edit', edit_gallery_post_path(@gallery, post) %></td>
+          <td><%= link_to 'Destroy', [@gallery, post], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +28,6 @@
 
 <br>
 
-<%= link_to 'New Post', new_gallery_post_path(@gallery.id) %>
+<% if @user_owns_gallery %>
+  <%= link_to 'New Post', new_gallery_post_path(@gallery.id) %>
+<% end %>

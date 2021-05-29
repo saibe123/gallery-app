@@ -18,6 +18,7 @@
 <p>
 <%= image_tag(@post.image) %>
 </p>
-
-<%= link_to 'Delete', [@gallery, @post], method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Back', [@gallery.user ,@gallery] %>
+<% if @user_owns_gallery %>
+  <%= link_to 'Delete', [@gallery, @post], method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+  <%= link_to 'Back', [@gallery.user ,@gallery] %>

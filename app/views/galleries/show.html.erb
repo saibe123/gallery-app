@@ -26,3 +26,5 @@
 <% if @user_owns_gallery %>
   <%= link_to 'Add Post', new_gallery_post_path(@gallery) %> |
 <% end %>
+
+<%= link_to 'Back', user_galleries_path(@user) %>
