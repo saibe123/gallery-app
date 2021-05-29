@@ -22,14 +22,16 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = @gallery.posts.build(post_params)
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to gallery_post_path(@gallery, @post), notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+    if current_user == @gallery.user
+      @post = @gallery.posts.build(post_params)
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to gallery_post_path(@gallery, @post), notice: "Post was successfully created." }
+          format.json { render :show, status: :created, location: @post }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -49,10 +51,12 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to gallery_posts_path(@gallery), notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+    if current_user == @gallery.user
+      @post.destroy
+      respond_to do |format|
+        format.html { redirect_to gallery_posts_path(@gallery), notice: "Post was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 

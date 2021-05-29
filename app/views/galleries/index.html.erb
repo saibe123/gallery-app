@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Galleries</h1>
-<% if user_signed_in? %>
+<% if !@user_owns_gallery %>
+  <Strong>Created by: </Strong>
+  <%= @user.username %>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -15,18 +18,17 @@
       <tr>
         <td><%= gallery.title %></td>
         <td><%= link_to 'Show', gallery %></td>
-        <td><%= link_to 'Edit', edit_user_gallery_path(current_user,gallery) %></td>
-        <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @user_owns_gallery %>
+          <td><%= link_to 'Edit', edit_user_gallery_path(current_user,gallery) %></td>
+          <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New Gallery', new_user_gallery_path(current_user) %>
-
-<% else %>
-
-<h2>Please sign in first!</h2>
+<% if @user_owns_gallery %>
+  <%= link_to 'New Gallery', new_user_gallery_path(current_user) %>
 <% end %>
 
 <br>

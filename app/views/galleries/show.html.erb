@@ -3,18 +3,26 @@
 <p>
   <strong>Title:</strong>
   <%= @gallery.title %>
-  <%= @gallery %>
 </p>
+
+<% if !@user_owns_gallery %>
+  <p>
+    <strong>Created by:</strong>
+    <%= @gallery.user.username %>
+  </p>
+<% end %>
 
 
 <% Post.where(gallery_id: @gallery.id).each do |post| %>
   <p>
   <%= post.title %>
   <%= link_to image_tag(post.thumb), [@gallery, post] %>
-  <%= link_to 'Destroy', [@gallery, post], method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% if @user_owns_gallery %>
+    <%= link_to 'Destroy', [@gallery, post], method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
   </p>
 <% end %>
 
-
-<%= link_to 'Add Post', new_gallery_post_path(@gallery) %> |
-<%= link_to 'Back', user_galleries_path(@user) %>
+<% if @user_owns_gallery %>
+  <%= link_to 'Add Post', new_gallery_post_path(@gallery) %> |
+<% end %>
