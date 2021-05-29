@@ -25,7 +25,6 @@ class GalleriesController < ApplicationController
   # POST /galleries or /galleries.json
   def create
     # @gallery = Gallery.new(gallery_params)
-    if  user_signed_in?
       gallery = @user.galleries.build(gallery_params)
       respond_to do |format|
         if @gallery.save
@@ -36,7 +35,6 @@ class GalleriesController < ApplicationController
           format.json { render json: @gallery.errors, status: :unprocessable_entity }
         end
       end
-    end
   end
 
   # PATCH/PUT /galleries/1 or /galleries/1.json
