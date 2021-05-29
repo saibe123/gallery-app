@@ -25,16 +25,18 @@ class GalleriesController < ApplicationController
   # POST /galleries or /galleries.json
   def create
     # @gallery = Gallery.new(gallery_params)
-      gallery = @user.galleries.build(gallery_params)
+    if  user_signed_in?
+      @gallery = @user.galleries.build(gallery_params)
       respond_to do |format|
         if @gallery.save
-          format.html { redirect_to @gallery, notice: "Gallery was successfully created." }
+          format.html { redirect_to [@user, @gallery], notice: "Gallery was successfully created." }
           format.json { render :show, status: :created, location: @gallery }
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @gallery.errors, status: :unprocessable_entity }
         end
       end
+    end
   end
 
   # PATCH/PUT /galleries/1 or /galleries/1.json
@@ -57,7 +59,7 @@ class GalleriesController < ApplicationController
     if current_user == @gallery.user
       @gallery.destroy
       respond_to do |format|
-        format.html { redirect_to user_gallery_path(@user), notice: "Gallery was successfully destroyed." }
+        format.html { redirect_to user_galleries_path(@user), notice: "Gallery was successfully destroyed." }
         format.json { head :no_content }
       end
     end
