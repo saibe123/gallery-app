@@ -58,4 +58,4 @@ gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'rails-assets-jcrop', source: 'https://rails-assets.org'
 gem 'pry'
-gem 'aws-sdk', '~> 2.3'
+gem 'aws-sdk-s3', require: false
