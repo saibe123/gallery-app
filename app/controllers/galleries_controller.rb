@@ -15,7 +15,11 @@ class GalleriesController < ApplicationController
   # GET /galleries/new
   def new
     # @gallery = Gallery.new
-    @gallery = @user.galleries.build
+    if current_user == @user
+      @gallery = @user.galleries.build
+    else
+      redirect_to root_path, warning: "You cannot create a gallery here"
+    end
   end
 
   # GET /galleries/1/edit
@@ -26,6 +30,7 @@ class GalleriesController < ApplicationController
   def create
     # @gallery = Gallery.new(gallery_params)
     if  user_signed_in?
+      if current_user == @user
       @gallery = @user.galleries.build(gallery_params)
       respond_to do |format|
         if @gallery.save
@@ -35,6 +40,9 @@ class GalleriesController < ApplicationController
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @gallery.errors, status: :unprocessable_entity }
         end
+      end
+    else
+      redirect_to root_path, warning: "You cannot create a gallery here"
       end
     end
   end
@@ -51,6 +59,8 @@ class GalleriesController < ApplicationController
             format.json { render json: @gallery.errors, status: :unprocessable_entity }
           end
       end
+    else
+      redirect_to root_path, warning: "You cannot update this gallery"
     end
   end
 
@@ -63,6 +73,8 @@ class GalleriesController < ApplicationController
         format.json { head :no_content }
       end
     end
+  else
+    redirect_to root_path, warning: "You cannot delete this gallery"
   end
 
   private
