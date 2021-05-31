@@ -26,8 +26,8 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
+    @post = @gallery.posts.build(post_params)
     if current_user == @gallery.user
-      @post = @gallery.posts.build(post_params)
       respond_to do |format|
         if @post.save
           format.html { redirect_to gallery_post_path(@gallery, @post), notice: "Post was successfully created." }
