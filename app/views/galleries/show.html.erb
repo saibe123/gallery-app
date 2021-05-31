@@ -4,16 +4,33 @@
   height: 300px;
   object-fit: cover;
 }
-}
+.modal-body{
+position:fixed;
+top:40px;
+left:0;
+right:0;
+bottom:0;
+width:auto;
+overflow:auto;}
+.modal-body img.img-responsive {width:auto;min-width:100%;height:auto;margin:auto;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 
 <p id="notice"><%= notice %></p>
-
 <% Post.where(gallery_id: @gallery.id).each do |post| %>
-  <div class="modal fade" id="postmodal-@(post.id)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= image_tag(post.image)  %>
+  <div class="modal" id="postmodal-<%=post.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-content">
+  <div class="modal-header">
+        <%= post.title %>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  <div class="modal-body">
+  <%= image_tag(post.image) %>
+  </div>
+  </div>
   </div>
   <% end %>
 
@@ -40,7 +57,7 @@
         <div class="col">
         <div class="text-center"> 
           <div class="card shadow-sm">
-            <%=link_to image_tag(post.thumb, class: "card-img-top"), "#exampleModal" ,"data-toggle" => "modal" %>
+            <%=link_to image_tag(post.thumb, class: "card-img-top"), "#postmodal-"+post.id.to_s ,"data-toggle" => "modal" %>
           <div class="card-body">
             <p class="card-text"><%= post.title %></p>
             <% if @user_owns_gallery %>
@@ -50,18 +67,18 @@
         </div>
         </div>
       </div>
-      <% end %>
+  <% end %>
 
-      <% if @user_owns_gallery %>
-      <div class="col">
-        <div class="text-center"> 
-          <div class="card shadow-sm">
+  <% if @user_owns_gallery %>
+    <div class="col">
+      <div class="text-center"> 
+        <div class="card shadow-sm">
           <svg class="bd-placeholder-img card-img-top" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Add new post</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em" >+</text></svg>
         </div>
-        </div>
       </div>
-      <% end %>
     </div>
+  <% end %>
+  </div>
   </div>
   </div>
 
@@ -72,30 +89,3 @@
 <% end %>
 
 <%= link_to 'Back', user_galleries_path(@user) %>
-
-
-
-<!-- Button trigger modal -->
-<%= link_to "Open modal", "#exampleModal", :class => "btn", "data-toggle" => "modal" %>
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
