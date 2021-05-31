@@ -2,4 +2,6 @@
 
 <%= render 'form', post: @post %>
 
-<%= link_to 'Back', user_gallery_path(@gallery.user, @gallery) %>
+<div style="position:relative;top:30px;left:20px">
+    <%= button_to 'Back', user_gallery_path(@gallery.user, @gallery), class: "btn btn-primary btn-lg", :method => :get %>
+</div>

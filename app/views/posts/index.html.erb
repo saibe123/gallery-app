@@ -2,18 +2,9 @@
 
 <h1>Posts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Gallery</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
+<div class="row">
     <% @posts.each do |post| %>
-      <tr>
         <td><%= post.title %></td>
         <td><%= post.gallery_id %></td>
         <td><%= link_to 'Show', [@gallery, post] %></td>
@@ -21,13 +12,14 @@
           <td><%= link_to 'Edit', edit_gallery_post_path(@gallery, post) %></td>
           <td><%= link_to 'Destroy', [@gallery, post], method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
-      </tr>
     <% end %>
-  </tbody>
-</table>
+</div>
 
 <br>
 
 <% if @user_owns_gallery %>
-  <%= link_to 'New Post', new_gallery_post_path(@gallery.id) %>
+  <div style="position:relative;top:30px;left:20px">
+    <%= button_to 'Back', unew_gallery_post_path(@gallery.id), class: "btn btn-primary btn-lg", :method => :get %>
+</div>
+
 <% end %>

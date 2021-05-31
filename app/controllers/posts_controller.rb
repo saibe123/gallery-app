@@ -33,11 +33,14 @@ class PostsController < ApplicationController
           format.json { render json: @post.errors, status: :unprocessable_entity }
         end
       end
+    else
+      redirect_to root_path, warning: "You cannot post here"
     end
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    if current_user == @gallery.user
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to gallery_post_path(@gallery), notice: "Post was successfully updated." }
@@ -47,6 +50,10 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    else
+      redirect_to root_path, warning: "You cannot update this"
+
+  end
   end
 
   # DELETE /posts/1 or /posts/1.json
@@ -57,6 +64,8 @@ class PostsController < ApplicationController
         format.html { redirect_to gallery_posts_path(@gallery), notice: "Post was successfully destroyed." }
         format.json { head :no_content }
       end
+    else 
+      redirect_to root_path, warning: "You cannot delete this post"
     end
   end
 

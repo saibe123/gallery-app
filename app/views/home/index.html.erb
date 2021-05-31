@@ -6,6 +6,20 @@
 }
   }
 </style>
+
+<% Post.all.each do |post| %>
+  <div class="modal" id="postmodal-<%=post.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-content">
+  <div class="modal-body">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:fixed; float:right;">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <%= image_tag(post.image, :align => "middle") %>
+  </div>
+  </div>
+  </div>
+  <% end %>
+
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
@@ -22,8 +36,7 @@
         <div class="col">
         <div class="text-center"> 
           <div class="card shadow-sm">
-            <%= link_to image_tag(post.thumb, :class =>"card-img-top"), [post.gallery, post] %>
-          <div class="card-body">
+            <%=link_to image_tag(post.thumb, class: "card-img-top"), "#postmodal-"+post.id.to_s ,"data-toggle" => "modal" %>          <div class="card-body">
             <p class="card-text"><%= post.title %></p>
             <p class="card-text">By User: <%= post.gallery.user.username %></p>
           </div>

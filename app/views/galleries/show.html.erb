@@ -84,4 +84,6 @@ overflow:auto;}
   </div>
   </div>
   </div>
-<%= link_to 'Back', user_galleries_path(@user) %>
+  <div style="position:relative;top:30px;left:20px">
+    <%= button_to 'Back', user_galleries_path(@user), class: "btn btn-primary btn-lg", :method => :get %>
+  </div>
