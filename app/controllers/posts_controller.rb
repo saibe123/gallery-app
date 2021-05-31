@@ -56,8 +56,7 @@ class PostsController < ApplicationController
     end
     else
       redirect_to root_path, warning: "You cannot update this"
-
-  end
+    end
   end
 
   # DELETE /posts/1 or /posts/1.json
