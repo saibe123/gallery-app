@@ -1,35 +1,84 @@
-<h2>Sign up</h2>
+<style>
+a {
+  color: #aaaaaa;
+  transition: all ease-in-out 200ms;
+}
+a:hover {
+  color: #333333;
+  text-decoration: none;
+}
+.login-form-1 {
+  max-width: 300px;
+  border-radius: 5px;
+  display: inline-block;
+}
+.login-form-1 .form-control {
+  border: 0;
+  box-shadow: 0 0 0;
+  border-radius: 0;
+  background: transparent;
+  color: #555555;
+  padding: 7px 0;
+  font-weight: bold;
+  height:auto;
+}
+.login-form-1 .form-group {
+  margin-bottom: 0;
+  border-bottom: 2px solid #efefef;
+  padding-right: 20px;
+  position: relative;
+}
+.login-group {
+  background: #ffffff;
+  color: #999999;
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+</style>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name) ) do |f| %>
+<%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-  <%= f.label :username %><br />
-  <%= f.text_field :username, autofocus: true, class: "input"%>
+  <div class="text-center" style="padding:50px 0">
+  <h2 class="heading text-4xl font-bold pt-4 mb-8">Sign up</h2>
+	<div class="login-form-1">
+	<form id="register-form" class="text-left">
+	<div class="login-group">
+  
+
+  <div class="field form-group">
+    <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: "Username" %>
   </div>
 
   
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="field form-group">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email" %>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder:"Password (6 chars min)"%>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="field form-group">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder: "Confirm password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="actions" style = "position:relative; top:10px">
+    <%= f.submit "Sign up"%>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions" style = "position:relative; top:20px">
+    <%= render "devise/shared/links" %>
   </div>
+
+  
+
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+
 <% end %>
-
-<%= render "devise/shared/links" %>

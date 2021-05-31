@@ -19,8 +19,7 @@
         <td><%= gallery.title %></td>
         <td><%= link_to 'Show', [@user, gallery] %></td>
         <% if @user_owns_gallery %>
-          <td><%= link_to 'Edit', edit_user_gallery_path(current_user,gallery) %></td>
-          <td><%= link_to 'Destroy', [@user, gallery], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Delete', [@user, gallery], method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
