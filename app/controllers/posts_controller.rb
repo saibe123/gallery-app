@@ -13,7 +13,11 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = @gallery.posts.build
+    if current_user == @gallery.user
+      @post = @gallery.posts.build
+    else
+      redirect_to root_path, warning: "You cannot post here"
+    end
   end
 
   # GET /posts/1/edit
