@@ -38,6 +38,7 @@ class PostsController < ApplicationController
         end
       end
     else
+      @opost,destroy
       redirect_to root_path, warning: "You cannot post here"
     end
   end

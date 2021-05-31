@@ -72,9 +72,9 @@ class GalleriesController < ApplicationController
         format.html { redirect_to user_galleries_path(@user), notice: "Gallery was successfully destroyed." }
         format.json { head :no_content }
       end
-    end
-  else
+      else
     redirect_to root_path, warning: "You cannot delete this gallery"
+    end
   end
 
   private
