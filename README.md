@@ -3,13 +3,15 @@
 Ruby version: 3.0.0
 
 Additional gems used:
-gem 'devise'
-gem 'pg', '~> 1.1'
-gem 'mini_magick'
-gem 'image_processing', '~> 1.2'
-gem 'rails-assets-jcrop', source: 'https://rails-assets.org'
-gem 'pry'
-gem 'aws-sdk-s3', require: false
+<br>gem 'devise' <br />
+<br>gem 'pg', '~> 1.1'<br />
+<br>gem 'mini_magick'<br />
+<br>gem 'image_processing', '~> 1.2'<br />
+<br>gem 'rails-assets-jcrop', source: 'https://rails-assets.org'<br />
+<br>gem 'pry'<br />
+<br>gem 'aws-sdk-s3', require: false<br />
+
+
 
 Database: Postgresql
 
