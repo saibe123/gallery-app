@@ -74,19 +74,14 @@ overflow:auto;}
     <div class="col">
       <div class="text-center"> 
         <div class="card shadow-sm">
+          <a href="<%=new_gallery_post_path(@gallery)%>">
           <svg class="bd-placeholder-img card-img-top" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Add new post</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em" >+</text></svg>
-        </div>
+          </a>
+          </div>
       </div>
     </div>
   <% end %>
   </div>
   </div>
   </div>
-
-
-
-<% if @user_owns_gallery %>
-  <%= link_to 'Add Post', new_gallery_post_path(@gallery) %> |
-<% end %>
-
 <%= link_to 'Back', user_galleries_path(@user) %>
