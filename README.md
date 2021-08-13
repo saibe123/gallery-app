@@ -21,6 +21,4 @@ Note that the current setup of the storage.yml is such that the project uses my 
 TODO:
 <br>Add Jcrop for cropping images on upload<br />
 <br>Use bootstrap for carousel on images<br />
-<br>Redo UI<br />
-<br>(maybe) Move from bootstrap to react<br />
 <br> Add editing title functionality for posts and galleries <br />
